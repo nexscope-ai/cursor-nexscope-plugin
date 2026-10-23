@@ -1,0 +1,15 @@
+{
+  "name": "nexscope",
+  "displayName": "Nexscope",
+  "version": "0.1.0",
+  "description": "Research ecommerce products, keywords, markets, competitors, and reviews with Nexscope.",
+  "author": {
+    "name": "Nexscope",
+    "email": "service@nexscope.ai"
+  },
+  "homepage": "https://www.nexscope.ai",
+  "repository": "https://github.com/nexscope-ai/cursor-nexscope-plugin",
+  "license": "MIT",
+  "keywords": ["ecommerce", "product-research", "amazon", "keywords", "market-research"],
+  "logo": "assets/logo.svg"
+}
