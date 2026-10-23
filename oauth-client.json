@@ -1,5 +1,5 @@
 {
-  "client_id": "https://nexscope-ai.github.io/cursor-nexscope-plugin/oauth-client.json",
+  "client_id": "https://learn.nexscope.ai/cursor-nexscope-plugin/oauth-client.json",
   "client_name": "Nexscope for Cursor",
   "redirect_uris": [
     "http://localhost:8787/callback",

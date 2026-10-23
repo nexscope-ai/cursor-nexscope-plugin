@@ -27,7 +27,7 @@ The MCP configuration reuses the existing service at `https://api.nexscope.ai/ap
 
 Cursor 3.24.18 requires a fixed client ID when the authorization server does not offer dynamic client registration. `mcp.json` sets a public client metadata URL as `auth.CLIENT_ID`; the existing Nexscope authorization server supports Client ID Metadata Documents (CIMD). This is still Cursor-managed OAuth with PKCE and user consent, without a client secret or API key.
 
-The repository's `oauth-client.json` must be served at `https://nexscope-ai.github.io/cursor-nexscope-plugin/oauth-client.json` with HTTP 200 and `Content-Type: application/json`. GitHub Pages should publish the `main` branch's root. The raw GitHub URL is unsuitable because its JSON content type is `text/plain`. Keep the URL stable and the callback allowlist limited to the documented Cursor desktop and web callbacks. A fork needs its own hosted metadata URL and matching `client_id` / `auth.CLIENT_ID` values.
+The repository's `oauth-client.json` must be served at `https://learn.nexscope.ai/cursor-nexscope-plugin/oauth-client.json` with HTTP 200 and `Content-Type: application/json`. GitHub Pages publishes the `main` branch's root under the organization's existing `learn.nexscope.ai` domain. Use this canonical URL: the `github.io` URL redirects, and Nexscope's metadata resolver rejects redirects. The raw GitHub URL is also unsuitable because its JSON content type is `text/plain`. Keep the URL stable and the callback allowlist limited to the documented Cursor desktop and web callbacks. A fork needs its own hosted metadata URL and matching `client_id` / `auth.CLIENT_ID` values.
 
 ## Example requests
 
