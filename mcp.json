@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "nexscope": {
+      "url": "https://api.nexscope.ai/api/skill-api/v2/mcp"
+    }
+  }
+}
