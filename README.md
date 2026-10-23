@@ -54,7 +54,7 @@ Run the dependency-free packaging check with Node.js 22 or later:
 node scripts/validate.mjs
 ```
 
-This checks the manifest, MCP configuration, public OAuth client metadata and exact callback allowlist, Skill metadata, logo, license, and required documents. It makes no network requests. Static validation is not proof of a working Cursor OAuth connection or a successful live research call. See [SUBMISSION.md](SUBMISSION.md) for the application text, manual acceptance checks, and outstanding release evidence.
+This checks the manifest, MCP configuration, public OAuth client metadata and exact callback allowlist, Skill metadata, logo, license, and README. It makes no network requests. Static validation is not proof of a working Cursor OAuth connection or a successful live research call.
 
 ## License
 
