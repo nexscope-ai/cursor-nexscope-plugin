@@ -2,6 +2,8 @@
 
 Prepared: October 23, 2026. Target version: 0.1.0. Status: **draft; do not submit yet**.
 
+Acceptance environment: Windows, Cursor 3.24.18. Runtime source verified against public commit `d3ab5ac` (the report can be updated independently of runtime files).
+
 ## Application fields
 
 These values match the fields observed at [Cursor Marketplace / Publish](https://cursor.com/marketplace/publish). The organization handle is a proposed namespace; availability has not been checked.
@@ -44,7 +46,7 @@ Only completed checks should be represented as passed in an application.
 
 | Check | Result |
 | --- | --- |
-| Repository contents | Nine files uploaded to GitHub. Fetched public `main` at `2eab39d37690198d207cffcc89ecab25f76b2100`; its contents matched the prepared local files. |
+| Repository contents | Ten files in the public candidate. Fetched `main` at `d3ab5ac`; all runtime files matched the tested local files. Only this acceptance report had a subsequent documentation update. |
 | Public endpoint, unauthenticated GET | October 23, 2026: existing MCP endpoint and `/mcp` both returned HTTP 401 with an OAuth resource-metadata challenge. No research calls were made. |
 | Protected resource metadata | HTTP 200; resource is the existing `/api/skill-api/v2/mcp` endpoint, authorization server is `https://api.nexscope.ai`, scope is `mcp:tools`. |
 | OAuth authorization-server metadata | HTTP 200; advertises authorization/token endpoints and PKCE S256. No dynamic `registration_endpoint` was advertised. This alone does not prove Cursor can authenticate. |
@@ -53,9 +55,10 @@ Only completed checks should be represented as passed in an application.
 | Unauthenticated MCP initialize | Passed on October 23, 2026: an unauthenticated JSON-RPC `initialize` returned HTTP 401 with an OAuth resource-metadata challenge. No research was executed. |
 | Local installation | Copied to `%USERPROFILE%\.cursor\plugins\local\nexscope` on Windows; validation passed from the installed directory. Cursor executable reports version 3.24.18. |
 | Cursor local discovery | Passed in Cursor 3.24.18: Customize displays Nexscope 0.1.0 as Local, with exactly one MCP server and one research Skill. |
-| Cursor OAuth | Initial URL-only connection failed: `Incompatible auth server: does not support dynamic client registration`. Added Cursor's supported `auth.CLIENT_ID` setting and a public CIMD document. Pending manual acceptance after publishing the document with the required JSON content type. Do not substitute API keys to claim OAuth success. |
+| Public OAuth client metadata | Passed on October 23, 2026: the canonical `https://learn.nexscope.ai/cursor-nexscope-plugin/oauth-client.json` returns HTTP 200 without redirect, `Content-Type: application/json`, and the exact expected client ID and callback allowlist. GitHub Pages publishes this repository under the organization's existing docs domain. |
+| Cursor OAuth | Initial URL-only connection failed: `Incompatible auth server: does not support dynamic client registration`. With Cursor's `auth.CLIENT_ID` and the public CIMD document, reloading Cursor changed the state to `Needs authentication`; Authenticate opened Nexscope's login page. User login/consent and authenticated discovery remain pending. No API key was substituted. |
 | Live research and CSV export | Pending manual acceptance with an authorized Nexscope account. |
-| Public repository and logo URL | Repository passed on October 23, 2026: GitHub settings reports Public and anonymous GET returned HTTP 200. The first SVG URL returned HTTP 200 but its embedded image failed browser rendering; replaced locally with the rendered PNG. Verify the new public PNG after upload. |
+| Public repository and logo URL | Passed on October 23, 2026: Public repository and raw PNG GET both returned HTTP 200. The original SVG's embedded image failed direct browser rendering despite HTTP 200; the PNG export preserves the brand artwork and displays correctly in Cursor's local plugin view. |
 | Marketplace application | Not submitted. |
 
 ## Manual acceptance before submission
