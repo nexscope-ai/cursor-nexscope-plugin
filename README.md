@@ -23,6 +23,12 @@ This repository is a listing candidate, not an approved Marketplace listing.
 
 The MCP configuration reuses the existing service at `https://api.nexscope.ai/api/skill-api/v2/mcp`. The URL determines the remote HTTP transport. The public guide also documents `/mcp`; this plugin keeps the existing Codex MCP plugin's endpoint. No new backend service is deployed.
 
+### OAuth compatibility
+
+Cursor 3.24.18 requires a fixed client ID when the authorization server does not offer dynamic client registration. `mcp.json` sets a public client metadata URL as `auth.CLIENT_ID`; the existing Nexscope authorization server supports Client ID Metadata Documents (CIMD). This is still Cursor-managed OAuth with PKCE and user consent, without a client secret or API key.
+
+The repository's `oauth-client.json` must be served at `https://nexscope-ai.github.io/cursor-nexscope-plugin/oauth-client.json` with HTTP 200 and `Content-Type: application/json`. GitHub Pages should publish the `main` branch's root. The raw GitHub URL is unsuitable because its JSON content type is `text/plain`. Keep the URL stable and the callback allowlist limited to the documented Cursor desktop and web callbacks. A fork needs its own hosted metadata URL and matching `client_id` / `auth.CLIENT_ID` values.
+
 ## Example requests
 
 - Find Amazon US travel mugs for the keyword `insulated travel mug` and summarize the returned products. Tell me about credit use before running the query.
@@ -48,7 +54,7 @@ Run the dependency-free packaging check with Node.js 22 or later:
 node scripts/validate.mjs
 ```
 
-This checks the manifest, MCP configuration, Skill metadata, logo, license, and required documents. It makes no network requests. Static validation is not proof of a working Cursor OAuth connection or a successful live research call. See [SUBMISSION.md](SUBMISSION.md) for the application text, manual acceptance checks, and outstanding release evidence.
+This checks the manifest, MCP configuration, public OAuth client metadata and exact callback allowlist, Skill metadata, logo, license, and required documents. It makes no network requests. Static validation is not proof of a working Cursor OAuth connection or a successful live research call. See [SUBMISSION.md](SUBMISSION.md) for the application text, manual acceptance checks, and outstanding release evidence.
 
 ## License
 

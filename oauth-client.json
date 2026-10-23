@@ -1,0 +1,12 @@
+{
+  "client_id": "https://nexscope-ai.github.io/cursor-nexscope-plugin/oauth-client.json",
+  "client_name": "Nexscope for Cursor",
+  "redirect_uris": [
+    "http://localhost:8787/callback",
+    "https://www.cursor.com/agents/mcp/oauth/callback"
+  ],
+  "token_endpoint_auth_method": "none",
+  "grant_types": ["authorization_code", "refresh_token"],
+  "response_types": ["code"],
+  "scope": "mcp:tools"
+}

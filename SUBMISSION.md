@@ -11,12 +11,12 @@ These values match the fields observed at [Cursor Marketplace / Publish](https:/
 | Organization name | Nexscope |
 | Organization handle | nexscope-ai |
 | Contact email | service@nexscope.ai |
-| Logotype URL | https://raw.githubusercontent.com/nexscope-ai/cursor-nexscope-plugin/main/assets/logo.svg |
+| Logotype URL | https://raw.githubusercontent.com/nexscope-ai/cursor-nexscope-plugin/main/assets/logo.png |
 | GitHub repository | https://github.com/nexscope-ai/cursor-nexscope-plugin |
 | Website URL | https://www.nexscope.ai |
 | Owner | Select the GitHub/Cursor account or organization authorized to publish for Nexscope. This is chosen by the signed-in applicant; it is not set by this repository. |
 
-The logo URL becomes publicly usable after the files are uploaded and the repository is Public. It is a square SVG with a white background plate and the existing Nexscope logo.
+The logo is a 320 × 320 PNG with a white background plate and the existing Nexscope artwork. It is exported from the original SVG wrapper so the image does not depend on embedded image loading under GitHub's SVG content security policy.
 
 ### Description — ready to paste
 
@@ -32,7 +32,7 @@ Nexscope 将电商研究带入 Cursor。用户通过 Cursor 的 MCP 连接流程
 - Category suggestion: Data & Analytics / Ecommerce, if offered by the form.
 - Open-source plugin license: MIT. This does not change the licenses of existing Codex repositories or the remote Nexscope service.
 - Remote MCP: `https://api.nexscope.ai/api/skill-api/v2/mcp` (existing service).
-- Authentication: host-managed OAuth, reusing the existing MCP connection approach. The plugin contains no token, API key, client secret, or bundled credential.
+- Authentication: host-managed OAuth with PKCE. Cursor uses a fixed public client metadata URL; the existing Nexscope server resolves that CIMD document. No token, API key, client secret, or bundled credential is included. The metadata is hosted by GitHub Pages from this public repository.
 - Privacy: https://www.nexscope.ai/privacy
 - Service terms: https://www.nexscope.ai/terms
 - Documentation/support: https://www.nexscope.ai/mcp-map and service@nexscope.ai
@@ -44,21 +44,24 @@ Only completed checks should be represented as passed in an application.
 
 | Check | Result |
 | --- | --- |
-| Repository contents downloaded | The signed-in GitHub page showed an empty Private repository with no branch or downloadable archive. The initial plugin is prepared locally. |
+| Repository contents | Nine files uploaded to GitHub. Fetched public `main` at `2eab39d37690198d207cffcc89ecab25f76b2100`; its contents matched the prepared local files. |
 | Public endpoint, unauthenticated GET | October 23, 2026: existing MCP endpoint and `/mcp` both returned HTTP 401 with an OAuth resource-metadata challenge. No research calls were made. |
 | Protected resource metadata | HTTP 200; resource is the existing `/api/skill-api/v2/mcp` endpoint, authorization server is `https://api.nexscope.ai`, scope is `mcp:tools`. |
 | OAuth authorization-server metadata | HTTP 200; advertises authorization/token endpoints and PKCE S256. No dynamic `registration_endpoint` was advertised. This alone does not prove Cursor can authenticate. |
 | Privacy, terms, and MCP guide | Public pages were accessible on October 23, 2026. |
-| Static plugin validation | Passed on October 23, 2026: manifest, OAuth-only MCP configuration, Skill frontmatter, embedded square logo, MIT license, and release documents. Run `node scripts/validate.mjs` to repeat. |
-| Cursor local discovery and OAuth | Pending manual acceptance. The current configuration intentionally preserves the original MCP connection approach; do not substitute API keys to claim OAuth success. |
+| Static plugin validation | Passed on October 23, 2026: manifest, OAuth-only MCP configuration, Skill frontmatter, square PNG logo, MIT license, and release documents. Run `node scripts/validate.mjs` to repeat. |
+| Unauthenticated MCP initialize | Passed on October 23, 2026: an unauthenticated JSON-RPC `initialize` returned HTTP 401 with an OAuth resource-metadata challenge. No research was executed. |
+| Local installation | Copied to `%USERPROFILE%\.cursor\plugins\local\nexscope` on Windows; validation passed from the installed directory. Cursor executable reports version 3.24.18. |
+| Cursor local discovery | Passed in Cursor 3.24.18: Customize displays Nexscope 0.1.0 as Local, with exactly one MCP server and one research Skill. |
+| Cursor OAuth | Initial URL-only connection failed: `Incompatible auth server: does not support dynamic client registration`. Added Cursor's supported `auth.CLIENT_ID` setting and a public CIMD document. Pending manual acceptance after publishing the document with the required JSON content type. Do not substitute API keys to claim OAuth success. |
 | Live research and CSV export | Pending manual acceptance with an authorized Nexscope account. |
-| Public repository and logo URL | Must be verified after upload and the requested change to Public. |
+| Public repository and logo URL | Repository passed on October 23, 2026: GitHub settings reports Public and anonymous GET returned HTTP 200. The first SVG URL returned HTTP 200 but its embedded image failed browser rendering; replaced locally with the rendered PNG. Verify the new public PNG after upload. |
 | Marketplace application | Not submitted. |
 
 ## Manual acceptance before submission
 
 1. Copy the plugin to `~/.cursor/plugins/local/nexscope`, reload Cursor, and confirm exactly one research Skill and one Nexscope MCP server. Record the Cursor version.
-2. Connect using Cursor's MCP OAuth flow. Verify approval, cancellation, denied access, disconnect, and reconnection without exposing credentials. Discovery metadata does not advertise dynamic registration; confirm that the current server's client-registration/metadata support works with this Cursor version. If not, record the exact compatibility gap for a separate service change. Do not add a guessed OAuth client ID or switch authentication methods.
+2. Verify that the public client metadata URL in `mcp.json` returns HTTP 200 and `Content-Type: application/json`, and its `client_id` and callback allowlist match the committed document. Connect using Cursor's MCP OAuth flow. Verify approval, cancellation, denied access, disconnect, and reconnection without exposing credentials. The fixed client ID avoids Cursor's dynamic-registration requirement; Nexscope resolves the public document using existing CIMD support. Do not add a guessed OAuth client ID or switch authentication methods.
 3. Ask for tool names only. Verify that discovery does not trigger a paid research request.
 4. With an authorized reviewer account and explicit agreement to any credit use, run one bounded product query using an actual published schema. Check business success and the original result.
 5. Export that existing result as CSV. Verify the file contents and that exporting does not repeat the paid query.

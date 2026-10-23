@@ -1,7 +1,11 @@
 {
   "mcpServers": {
     "nexscope": {
-      "url": "https://api.nexscope.ai/api/skill-api/v2/mcp"
+      "url": "https://api.nexscope.ai/api/skill-api/v2/mcp",
+      "auth": {
+        "CLIENT_ID": "https://nexscope-ai.github.io/cursor-nexscope-plugin/oauth-client.json",
+        "scopes": ["mcp:tools"]
+      }
     }
   }
 }
