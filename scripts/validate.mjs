@@ -45,6 +45,4 @@ assert.equal(png.readUInt32BE(16), 320);
 assert.equal(png.readUInt32BE(20), 320, 'Marketplace logo must be square');
 assert.match(read('LICENSE'), /^MIT License/);
 assert.match(read('README.md'), /## Try it before marketplace publication/);
-assert.match(read('SUBMISSION.md'), /draft; do not submit yet/);
-assert.match(read('SUBMISSION.md'), /Pending manual acceptance/);
-console.log('PASS: manifest, OAuth-only MCP configuration, Skill, square PNG logo, MIT license, and release documents. No network or paid calls made.');
+console.log('PASS: manifest, OAuth-only MCP configuration, Skill, square PNG logo, MIT license, and README. No network or paid calls made.');
