@@ -28,7 +28,7 @@ assert.deepEqual(JSON.parse(read('mcp.json')), {
 assert.deepEqual(JSON.parse(read('oauth-client.json')), {
   client_id: clientId,
   client_name: 'Nexscope for Cursor',
-  redirect_uris: ['http://localhost:8787/callback', 'https://www.cursor.com/agents/mcp/oauth/callback'],
+  redirect_uris: ['http://localhost:8787/callback', 'https://www.cursor.com/agents/mcp/oauth/callback', 'https://cursor.com/agents/mcp/oauth/callback'],
   token_endpoint_auth_method: 'none',
   grant_types: ['authorization_code', 'refresh_token'],
   response_types: ['code'],

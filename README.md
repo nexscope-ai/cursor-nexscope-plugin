@@ -29,6 +29,8 @@ Cursor 3.24.18 requires a fixed client ID when the authorization server does not
 
 The repository's `oauth-client.json` must be served at `https://learn.nexscope.ai/cursor-nexscope-plugin/oauth-client.json` with HTTP 200 and `Content-Type: application/json`. GitHub Pages publishes the `main` branch's root under the organization's existing `learn.nexscope.ai` domain. Use this canonical URL: the `github.io` URL redirects, and Nexscope's metadata resolver rejects redirects. The raw GitHub URL is also unsuitable because its JSON content type is `text/plain`. Keep the URL stable and the callback allowlist limited to the documented Cursor desktop and web callbacks. A fork needs its own hosted metadata URL and matching `client_id` / `auth.CLIENT_ID` values.
 
+Keep both `http://localhost:8787/callback` and `https://www.cursor.com/agents/mcp/oauth/callback` for existing clients. The www callback returns HTTP 308 to `https://cursor.com/agents/mcp/oauth/callback`, so the allowlist also includes that canonical callback. Nexscope builds the consent page's CSP `form-action` from registered redirect origins; including the canonical origin prevents CSP from blocking the redirected consent submission.
+
 ## Example requests
 
 - Find Amazon US travel mugs for the keyword `insulated travel mug` and summarize the returned products. Tell me about credit use before running the query.
