@@ -2,6 +2,8 @@
 
 Research ecommerce products, keywords, markets, competitors, and reviews from Cursor using [Nexscope](https://www.nexscope.ai).
 
+[Browse Nexscope MCP tools](https://www.nexscope.ai/mcp?co-from=github-cursor-plugin&utm_source=github&utm_medium=referral&utm_campaign=github_mcp_launch&utm_content=cursor-nexscope-plugin_readme_tools) · [MCP connection guide](https://www.nexscope.ai/mcp-map?co-from=github-cursor-plugin&utm_source=github&utm_medium=referral&utm_campaign=github_mcp_launch&utm_content=cursor-nexscope-plugin_readme_setup)
+
 This is a small Cursor Marketplace plugin: one research Skill and a connection to the existing Nexscope remote MCP service. It bundles no CLI, executable, hooks, or Canvas UI.
 
 ## Requirements
